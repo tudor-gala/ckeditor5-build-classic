@@ -40,6 +40,7 @@ import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/s
 import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical.js';
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
+import PastePlainText from './paste-plain-text.js';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -78,7 +79,9 @@ ClassicEditor.builtinPlugins = [
 	SpecialCharactersLatin,
 	SpecialCharactersMathematical,
 	SpecialCharactersText,
-	TodoList
+	TodoList,
+
+	PastePlainText
 ];
 
 // Editor configuration.
@@ -105,7 +108,8 @@ ClassicEditor.defaultConfig = {
 			'redo',
 			'|',
 			'fontColor',
-			'specialCharacters'
+			'specialCharacters',
+			'pastePlainText'
 		]
 	},
 	image: {
