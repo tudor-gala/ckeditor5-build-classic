@@ -1,3 +1,9 @@
+import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import Command from '@ckeditor/ckeditor5-core/src/command';
+import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+
+import plainTextToHtml from '@ckeditor/ckeditor5-clipboard/src/utils/plaintexttohtml';
+
 class PastePlainText extends Plugin {
     static get pluginName() {
         return 'PastePlainText'
