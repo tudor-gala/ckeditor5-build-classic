@@ -108,8 +108,7 @@ ClassicEditor.defaultConfig = {
 			'redo',
 			'|',
 			'fontColor',
-			'specialCharacters',
-			'pastePlainText'
+			'specialCharacters'
 		]
 	},
 	image: {
