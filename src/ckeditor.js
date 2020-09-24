@@ -31,6 +31,7 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 
 import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor.js';
+import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline.js';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters.js';
 import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows.js';
@@ -39,6 +40,7 @@ import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/
 import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin.js';
 import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical.js';
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
+
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import PastePlainText from './paste-plain-text.js';
 
@@ -71,6 +73,7 @@ ClassicEditor.builtinPlugins = [
 	TextTransformation,
 
 	FontColor,
+	HorizontalLine,
 	RemoveFormat,
 	SpecialCharacters,
 	SpecialCharactersArrows,
@@ -81,7 +84,7 @@ ClassicEditor.builtinPlugins = [
 	SpecialCharactersText,
 	TodoList,
 
-	PastePlainText
+	PastePlainText,
 ];
 
 // Editor configuration.
@@ -108,7 +111,8 @@ ClassicEditor.defaultConfig = {
 			'redo',
 			'|',
 			'fontColor',
-			'specialCharacters'
+			'horizontalLine',
+			'specialCharacters',
 		]
 	},
 	image: {

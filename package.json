@@ -1,6 +1,6 @@
 {
   "name": "@tudor.gala/ckeditor5-build-classic",
-  "version": "22.0.3",
+  "version": "22.0.4",
   "description": "The classic editor build of CKEditor 5 – the best browser-based rich text editor.",
   "keywords": [
     "ckeditor5-build",
@@ -79,5 +79,7 @@
   "directories": {
     "test": "tests"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@ckeditor/ckeditor5-horizontal-line": "^22.0.0"
+  }
 }
