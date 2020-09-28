@@ -40,9 +40,11 @@ import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/
 import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin.js';
 import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical.js';
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
-
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
+
 import PastePlainText from './paste-plain-text.js';
+import Emoji from './ckeditor5-emoji/emoji.js';
+import EmojiData from './ckeditor5-emoji/emojidata.js';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -83,6 +85,8 @@ ClassicEditor.builtinPlugins = [
 	SpecialCharactersMathematical,
 	SpecialCharactersText,
 	TodoList,
+	Emoji,
+	EmojiData,
 
 	PastePlainText,
 ];
@@ -113,6 +117,7 @@ ClassicEditor.defaultConfig = {
 			'fontColor',
 			'horizontalLine',
 			'specialCharacters',
+			'emoji',
 		]
 	},
 	image: {
