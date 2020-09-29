@@ -31,7 +31,7 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 
 import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor.js';
-import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline.js';
+import HorizontalLine from './ckeditor5-horizontal-line/src/horizontalline.js';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters.js';
 import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows.js';
@@ -118,7 +118,8 @@ ClassicEditor.defaultConfig = {
 			'horizontalLine',
 			'specialCharacters',
 			'emoji',
-		]
+		],
+		shouldNotGroupWhenFull: true,
 	},
 	image: {
 		toolbar: [
