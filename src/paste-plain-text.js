@@ -14,7 +14,7 @@ class PastePlainText extends Plugin {
         const editingView = editor.editing.view;
 
         editingView.document.on( 'clipboardInput', ( evt, data ) => {
-            if ( editor.isReadOnly || !command.value ) {
+            if (editor.isReadOnly) {
                 return;
             }
 
