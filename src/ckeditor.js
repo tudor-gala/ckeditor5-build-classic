@@ -8,7 +8,7 @@ import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classicedi
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
+import Autoformat from './ckeditor5-autoformat/autoformat.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
@@ -104,22 +104,18 @@ ClassicEditor.defaultConfig = {
 			'numberedList',
 			'todoList',
 			'|',
-			'indent',
-			'outdent',
-			'|',
-			'imageUpload',
-			'blockQuote',
+			'fontColor',
+			'emoji',
+			'horizontalLine',
 			'insertTable',
+			'imageUpload',
 			'mediaEmbed',
+			'|',
 			'undo',
 			'redo',
-			'|',
-			'fontColor',
-			'horizontalLine',
+			'blockQuote',
 			'specialCharacters',
-			'emoji',
 		],
-		shouldNotGroupWhenFull: true,
 	},
 	image: {
 		toolbar: [
