@@ -170,7 +170,7 @@ export default class Autoformat extends Plugin {
 
 	_addSystemoAutoFormats() {
 		if (this.editor.commands.get( 'horizontalLine' )) {
-			blockAutoformatEditing(this.editor, this, /^--$/, 'horizontalLine');
+			blockAutoformatEditing(this.editor, this, /^---$/, 'horizontalLine');
 		}
 
 		if (this.editor.commands.get( 'todoList' )) {
