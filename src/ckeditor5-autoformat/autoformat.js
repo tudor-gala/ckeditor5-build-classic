@@ -10,6 +10,8 @@
 import blockAutoformatEditing from './blockautoformatediting';
 import inlineAutoformatEditing from './inlineautoformatediting';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import LastColorCommand from './lastColorCommand';
+import { FONT_COLOR } from '@ckeditor/ckeditor5-font/src/utils';
 
 /**
  * Enables a set of predefined autoformatting actions.
@@ -37,6 +39,7 @@ export default class Autoformat extends Plugin {
 		this._addBlockQuoteAutoformats();
 		this._addCodeBlockAutoformats();
 		this._addSystemoAutoFormats();
+		this._bindSystemoKeyboardShortcuts();
 	}
 
 	/**
@@ -176,7 +179,22 @@ export default class Autoformat extends Plugin {
 		if (this.editor.commands.get( 'todoList' )) {
 			blockAutoformatEditing(this.editor, this, /^\[\]$/, 'todoList');
 		}
+	}
 
+	_bindSystemoKeyboardShortcuts() {
+		const command = this.editor.commands.get(FONT_COLOR);
+
+		this.listenTo(command, 'execute', (a, b) => {
+			try {
+				this.lastColor = b[0].value;
+			} catch (e) {}
+		} );
+
+		this._lastColorCommand = new LastColorCommand(this.editor);
+
+		this.editor.commands.add('lastColor', this._lastColorCommand);
+
+		this.editor.keystrokes.set('CTRL+SHIFT+H', 'lastColor');
 	}
 }
 
