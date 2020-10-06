@@ -172,11 +172,11 @@ export default class Autoformat extends Plugin {
 	}
 
 	_addSystemoAutoFormats() {
-		if (this.editor.commands.get( 'horizontalLine' )) {
+		if (this.editor.commands.get('horizontalLine')) {
 			blockAutoformatEditing(this.editor, this, /^---$/, 'horizontalLine');
 		}
 
-		if (this.editor.commands.get( 'todoList' )) {
+		if (this.editor.commands.get('todoList')) {
 			blockAutoformatEditing(this.editor, this, /^\[\]$/, 'todoList');
 		}
 	}

@@ -124,10 +124,14 @@ export default function blockAutoformatEditing( editor, plugin, pattern, callbac
 			const end = writer.createPositionAt( blockToFormat, match[ 0 ].length );
 			const range = new LiveRange( start, end );
 
+			if (callbackOrCommand === 'horizontalLine') {
+				writer.remove( range );
+			}
+
 			const wasChanged = callback( { match } );
 
 			// Remove matched text.
-			if ( wasChanged !== false ) {
+			if ( wasChanged !== false && callbackOrCommand !== 'horizontalLine') {
 				writer.remove( range );
 			}
 

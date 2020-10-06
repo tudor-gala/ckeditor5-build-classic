@@ -45,7 +45,7 @@ export default class HorizontalLineCommand extends Command {
 			let nextElement = horizontalElement.nextSibling;
 
 			// Check whether an element next to the inserted horizontal line is defined and can contain a text.
-			const canSetSelection = nextElement && model.schema.checkChild( nextElement, '$text' );
+			// const canSetSelection = nextElement && model.schema.checkChild( nextElement, '$text' );
 
 			// If the element is missing, but a paragraph could be inserted next to the horizontal line, let's add it.
 			// if ( !canSetSelection && model.schema.checkChild( horizontalElement.parent, 'paragraph' ) ) {
