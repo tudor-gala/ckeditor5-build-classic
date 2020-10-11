@@ -32,6 +32,7 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 
 import FontColor from '@ckeditor/ckeditor5-font/src/fontcolor.js';
 import HorizontalLine from './ckeditor5-horizontal-line/src/horizontalline.js';
+import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize.js';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters.js';
 import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows.js';
@@ -62,6 +63,7 @@ ClassicEditor.builtinPlugins = [
 	Image,
 	ImageCaption,
 	ImageStyle,
+	ImageResize,
 	ImageToolbar,
 	ImageUpload,
 	Indent,
