@@ -58,9 +58,9 @@ export default class Autoformat extends Plugin {
 			blockAutoformatEditing( this.editor, this, /^[*-]\s$/, 'bulletedList' );
 		}
 
-		if ( commands.get( 'numberedList' ) ) {
-			blockAutoformatEditing( this.editor, this, /^1[.|)]\s$/, 'numberedList' );
-		}
+		// if ( commands.get( 'numberedList' ) ) {
+		// 	blockAutoformatEditing( this.editor, this, /^1[.|)]\s$/, 'numberedList' );
+		// }
 	}
 
 	/**
