@@ -1,6 +1,6 @@
 {
   "name": "@tudor.gala/ckeditor5-build-classic",
-  "version": "22.0.13",
+  "version": "22.0.14",
   "description": "The classic editor build of CKEditor 5 – the best browser-based rich text editor.",
   "keywords": [
     "ckeditor5-build",
@@ -40,7 +40,6 @@
     "@ckeditor/ckeditor5-image": "^22.0.0",
     "@ckeditor/ckeditor5-indent": "^22.0.0",
     "@ckeditor/ckeditor5-link": "^22.0.0",
-    "@ckeditor/ckeditor5-list": "^22.0.0",
     "@ckeditor/ckeditor5-media-embed": "^22.0.0",
     "@ckeditor/ckeditor5-paragraph": "^22.0.0",
     "@ckeditor/ckeditor5-paste-from-office": "^22.0.0",

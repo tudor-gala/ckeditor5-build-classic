@@ -38,8 +38,9 @@ export default class Autoformat extends Plugin {
 		this._addHeadingAutoformats();
 		this._addBlockQuoteAutoformats();
 		this._addCodeBlockAutoformats();
-		this._addSystemoAutoFormats();
-		this._bindSystemoKeyboardShortcuts();
+		this._addCustomAutoFormats();
+		this._bindCustomKeyboardShortcuts();
+		this._bindCustomLinkBehaviour();
 	}
 
 	/**
@@ -171,7 +172,7 @@ export default class Autoformat extends Plugin {
 		}
 	}
 
-	_addSystemoAutoFormats() {
+	_addCustomAutoFormats() {
 		if (this.editor.commands.get('horizontalLine')) {
 			blockAutoformatEditing(this.editor, this, /^---$/, 'horizontalLine');
 		}
@@ -181,7 +182,7 @@ export default class Autoformat extends Plugin {
 		}
 	}
 
-	_bindSystemoKeyboardShortcuts() {
+	_bindCustomKeyboardShortcuts() {
 		const command = this.editor.commands.get(FONT_COLOR);
 
 		this.listenTo(command, 'execute', (a, b) => {
@@ -195,6 +196,17 @@ export default class Autoformat extends Plugin {
 		this.editor.commands.add('lastColor', this._lastColorCommand);
 
 		this.editor.keystrokes.set('CTRL+SHIFT+H', 'lastColor');
+	}
+
+	_bindCustomLinkBehaviour() {
+		const command = this.editor.commands.get('link');
+
+		this.listenTo(command, 'execute', () => {
+			for ( const curRange of editor.model.document.selection.getRanges() ) {
+				editor.model.document.selection._setTo(curRange.end);
+				break;
+			}
+		});
 	}
 }
 
