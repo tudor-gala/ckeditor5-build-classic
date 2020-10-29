@@ -43,7 +43,7 @@ import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-character
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
 import TodoList from './ckeditor5-list/src/todolist.js';
 
-import PastePlainText from './paste-plain-text.js';
+import StripPasteFormat from './strip-paste-format.js';
 import Emoji from './ckeditor5-emoji/emoji.js';
 import EmojiData from './ckeditor5-emoji/emojidata.js';
 
@@ -90,7 +90,7 @@ ClassicEditor.builtinPlugins = [
 	Emoji,
 	EmojiData,
 
-	PastePlainText,
+	StripPasteFormat,
 ];
 
 // Editor configuration.

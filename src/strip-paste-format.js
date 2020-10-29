@@ -1,9 +1,9 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import plainTextToHtml from '@ckeditor/ckeditor5-clipboard/src/utils/plaintexttohtml';
 
-class PastePlainText extends Plugin {
+class StripPasteFormat extends Plugin {
     static get pluginName() {
-        return 'PastePlainText'
+        return 'StripPasteFormat'
     }
 
     init() {
@@ -30,4 +30,4 @@ class PastePlainText extends Plugin {
     }
 }
 
-export default PastePlainText;
+export default StripPasteFormat;

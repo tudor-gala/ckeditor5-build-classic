@@ -9,7 +9,7 @@
 
 .todo-list__label.is-checked + .todo-list__label__description {
 	text-decoration: line-through;
-	opacity: .5;
+	opacity: .3;
 }
 
 .ck-content .todo-list {
@@ -74,8 +74,8 @@
 
 			&[checked] {
 				&::before {
-					background: hsl(126, 64%, 41%);
-					border-color: hsl(126, 64%, 41%);
+					background: #2c98e3;
+					border-color: #2c98e3;
 				}
 
 				&::after {
