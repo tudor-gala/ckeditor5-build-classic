@@ -199,7 +199,8 @@ export default class Autoformat extends Plugin {
 	}
 
 	_bindCustomLinkBehaviour() {
-		const command = this.editor.commands.get('link');
+		const editor = this.editor;
+		const command = editor.commands.get('link');
 
 		this.listenTo(command, 'execute', () => {
 			for ( const curRange of editor.model.document.selection.getRanges() ) {

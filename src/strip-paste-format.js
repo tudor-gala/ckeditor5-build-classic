@@ -21,6 +21,8 @@ class StripPasteFormat extends Plugin {
             const dataTransfer = data.dataTransfer;
             let content = plainTextToHtml( dataTransfer.getData( 'text/plain' ) );
             content = content.replace(/<p><\/p>/g, '');
+            content = content.replace(/<p><br>/g, '<p>');
+            content = content.replace(/<br><\/p>/g, '</p>');
             content = clipboardPlugin._htmlDataProcessor.toView( content );
             clipboardPlugin.fire( 'inputTransformation', { content, dataTransfer } );
             editingView.scrollToTheSelection();
