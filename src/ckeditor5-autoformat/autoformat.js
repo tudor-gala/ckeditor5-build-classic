@@ -203,8 +203,19 @@ export default class Autoformat extends Plugin {
 		const command = editor.commands.get('link');
 
 		this.listenTo(command, 'execute', () => {
-			for ( const curRange of editor.model.document.selection.getRanges() ) {
+			for (const curRange of editor.model.document.selection.getRanges()) {
+				curRange.end.stickiness = 'toNone';
+
 				editor.model.document.selection._setTo(curRange.end);
+
+				editor.model.change(writer => {
+					writer.removeSelectionAttribute('linkHref');
+
+					for (const decorator of command.manualDecorators) {
+						writer.removeSelectionAttribute(decorator.id);
+					}
+				});
+
 				break;
 			}
 		});
