@@ -19,7 +19,28 @@ class StripPasteFormat extends Plugin {
     }
 
     stripInvalidColors(str) {
-        return str.replace(/color:\s*(?!(hsl\(0, 0%, 0%\)|hsl\(0, 0%, 30%\)|hsl\(0, 0%, 60%\)|hsl\(0, 0%, 90%\)|hsl\(0, 0%, 100%\)|hsl\(0, 75%, 60%\)|hsl\(30, 75%, 60%\)|hsl\(60, 75%, 60%\)|hsl\(90, 75%, 60%\)|hsl\(120, 75%, 60%\)|hsl\(150, 75%, 60%\)|hsl\(180, 75%, 60%\)|hsl\(210, 75%, 60%\)|hsl\(240, 75%, 60%\)|hsl\(270, 75%, 60%\)))([^;]*);/gi, '');
+        return str.replace(/color:\s*(?!(hsl\(0,\s*0%,\s*0%\)|hsl\(0,\s*0%,\s*30%\)|hsl\(0,\s*0%,\s*60%\)|hsl\(0,\s*0%,\s*90%\)|hsl\(0,\s*0%,\s*100%\)|hsl\(0,\s*75%,\s*60%\)|hsl\(30,\s*75%,\s*60%\)|hsl\(60,\s*75%,\s*60%\)|hsl\(90,\s*75%,\s*60%\)|hsl\(120,\s*75%,\s*60%\)|hsl\(150,\s*75%,\s*60%\)|hsl\(180,\s*75%,\s*60%\)|hsl\(210,\s*75%,\s*60%\)|hsl\(240,\s*75%,\s*60%\)|hsl\(270,\s*75%,\s*60%\)))([^;]*);/gi, '');
+    }
+
+    stripInlineStyles(str) {
+        str.match(/style="[^"]*"/gi).forEach(i => {
+            const inner = i.substr(7, i.length - 8).split(';');
+            let color;
+
+            inner.forEach(style => {
+                if (style.trim().substr(0, 6).toLowerCase() === 'color:') {
+                    color = style.trim();
+                }
+            });
+
+            if (color) {
+                str = str.replace(i, `style="${color}"`);
+            } else {
+                str = str.replace(i, '');
+            }
+        });
+
+        return str;
     }
 
     init() {
@@ -36,6 +57,7 @@ class StripPasteFormat extends Plugin {
             const { bodyString } = parseHtml(dataTransfer.getData('text/html'), editor.editing.view.document.stylesProcessor);
             let content = this.stripTags(bodyString, '<b><i><ol><ul><li><h1><h2><h3><hr><p><strong><input><span><a>')
             content = this.stripInvalidColors(content);
+            content = this.stripInlineStyles(content);
 
 // console.log('before', dataTransfer.getData('text/html'));
 // console.log('after', content);
