@@ -23,7 +23,13 @@ class StripPasteFormat extends Plugin {
     }
 
     stripInlineStyles(str) {
-        str.match(/style="[^"]*"/gi).forEach(i => {
+        const matches = str.match(/style="[^"]*"/gi);
+
+        if (!Array.isArray(matches)) {
+            return str;
+        }
+
+        matches.forEach(i => {
             const inner = i.substr(7, i.length - 8).split(';');
             let color;
 
