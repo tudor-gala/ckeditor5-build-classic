@@ -24,23 +24,34 @@ class StripPasteFormat extends Plugin {
 
     stripInlineStyles(str) {
         const matches = str.match(/style="[^"]*"/gi);
+        const allowed = [
+            /^color:/,
+            /^font-weight:/,
+            /^font-style:/,
+        ];
 
         if (!Array.isArray(matches)) {
             return str;
         }
 
         matches.forEach(i => {
+            const filtered = [];
             const inner = i.substr(7, i.length - 8).split(';');
-            let color;
 
             inner.forEach(style => {
-                if (style.trim().substr(0, 6).toLowerCase() === 'color:') {
-                    color = style.trim();
+                const trimmed = style.trim();
+
+                for (let i = 0; i < allowed.length; i++) {
+                    if (trimmed.match(allowed[i])) {
+                        filtered.push(trimmed);
+                        break;
+                    }
                 }
             });
 
-            if (color) {
-                str = str.replace(i, `style="${color}"`);
+            if (filtered.length) {
+                const allStyles = filtered.join(';');
+                str = str.replace(i, `style="${allStyles}"`);
             } else {
                 str = str.replace(i, '');
             }
@@ -61,9 +72,9 @@ class StripPasteFormat extends Plugin {
 
             const dataTransfer = data.dataTransfer;
             const { bodyString } = parseHtml(dataTransfer.getData('text/html'), editor.editing.view.document.stylesProcessor);
-            let content = this.stripTags(bodyString, '<b><i><ol><ul><li><h1><h2><h3><hr><p><strong><input><span><a>')
-            content = this.stripInvalidColors(content);
+            let content = this.stripTags(bodyString, '<b><i><ol><ul><li><h1><h2><h3><hr><p><strong><input><span><a>');
             content = this.stripInlineStyles(content);
+            content = this.stripInvalidColors(content);
 
 // console.log('before', dataTransfer.getData('text/html'));
 // console.log('after', content);
