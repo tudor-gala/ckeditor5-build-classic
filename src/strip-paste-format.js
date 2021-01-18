@@ -1,5 +1,6 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import { parseHtml } from "@ckeditor/ckeditor5-paste-from-office/src/filters/parse";
+import plainTextToHtml from '@ckeditor/ckeditor5-clipboard/src/utils/plaintexttohtml';
 
 class StripPasteFormat extends Plugin {
     static get pluginName() {
@@ -64,6 +65,7 @@ class StripPasteFormat extends Plugin {
         const editor = this.editor;
         const clipboardPlugin = editor.plugins.get( 'Clipboard' );
         const editingView = editor.editing.view;
+        let content;
 
         editingView.document.on( 'clipboardInput', ( evt, data ) => {
             if ( editor.isReadOnly ) {
@@ -71,13 +73,25 @@ class StripPasteFormat extends Plugin {
             }
 
             const dataTransfer = data.dataTransfer;
-            const { bodyString } = parseHtml(dataTransfer.getData('text/html'), editor.editing.view.document.stylesProcessor);
-            let content = this.stripTags(bodyString, '<b><i><ol><ul><li><h1><h2><h3><hr><p><strong><input><span><a>');
-            content = this.stripInlineStyles(content);
-            content = this.stripInvalidColors(content);
 
-// console.log('before', dataTransfer.getData('text/html'));
-// console.log('after', content);
+            if (Array.from(dataTransfer.types).includes('text/html')) {
+                const { bodyString } = parseHtml(dataTransfer.getData('text/html'), editor.editing.view.document.stylesProcessor);
+                content = this.stripTags(bodyString, '<b><i><ol><ul><li><h1><h2><h3><hr><p><strong><input><span><a>');
+                content = this.stripInlineStyles(content);
+                content = this.stripInvalidColors(content);
+
+                console.log('before >>', dataTransfer.getData('text/html'));
+                // console.log('after >>', content);
+            } else {
+                content = plainTextToHtml( dataTransfer.getData( 'text/plain' ) );
+                content = content.replace(/<p><\/p>/g, '');
+                content = content.replace(/<p><br>/g, '<p>');
+                content = content.replace(/<br><\/p>/g, '</p>');
+
+                console.log('before >>', dataTransfer.getData('text/plain'));
+                // console.log('after >>', content);
+            }
+
             content = clipboardPlugin._htmlDataProcessor.toView( content );
             clipboardPlugin.fire( 'inputTransformation', { content, dataTransfer } );
             editingView.scrollToTheSelection();
