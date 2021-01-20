@@ -76,21 +76,25 @@ class StripPasteFormat extends Plugin {
 
             if (Array.from(dataTransfer.types).includes('text/html')) {
                 const { bodyString } = parseHtml(dataTransfer.getData('text/html'), editor.editing.view.document.stylesProcessor);
+
                 content = this.stripTags(bodyString, '<b><i><ol><ul><li><h1><h2><h3><hr><p><strong><input><span><a>');
                 content = this.stripInlineStyles(content);
                 content = this.stripInvalidColors(content);
 
                 console.log('before >>', dataTransfer.getData('text/html'));
-                // console.log('after >>', content);
             } else {
                 content = plainTextToHtml( dataTransfer.getData( 'text/plain' ) );
-                content = content.replace(/<p><\/p>/g, '');
-                content = content.replace(/<p><br>/g, '<p>');
-                content = content.replace(/<br><\/p>/g, '</p>');
 
                 console.log('before >>', dataTransfer.getData('text/plain'));
-                // console.log('after >>', content);
             }
+
+            content = content.replace(/<p><\/p>/g, '');
+            content = content.replace(/<p><br>/g, '<p>');
+            content = content.replace(/<br><\/p>/g, '</p>');
+            content = content.replace(/(<br>)+/g, '<br>');
+            content = content.replace(/^(<br>)+/g, '');
+
+            // console.log('after >>', content);
 
             content = clipboardPlugin._htmlDataProcessor.toView( content );
             clipboardPlugin.fire( 'inputTransformation', { content, dataTransfer } );
