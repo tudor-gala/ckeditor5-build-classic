@@ -52,7 +52,7 @@ class StripPasteFormat extends Plugin {
 
             if (filtered.length) {
                 const allStyles = filtered.join(';');
-                str = str.replace(i, `style="${allStyles}"`);
+                str = str.replace(i, `style="${allStyles};"`);
             } else {
                 str = str.replace(i, '');
             }
