@@ -13,7 +13,11 @@ class StripPasteFormat extends Plugin {
 
         return str.replace(tags, ($0, $1) => {
             const tag = $1.toLowerCase();
-            const replacement = blockLevel.includes(tag) ? '<br>' : '';
+            let replacement = '';
+
+            if (blockLevel.includes(tag)) {
+                replacement = $0.match(/^<\//) ? '</p>' : '<p>';
+            }
 
             return allow.indexOf(`<${tag}>`) > -1 ? $0 : replacement;
         });
