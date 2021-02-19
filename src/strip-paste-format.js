@@ -81,7 +81,7 @@ class StripPasteFormat extends Plugin {
             if (Array.from(dataTransfer.types).includes('text/html')) {
                 const { bodyString } = parseHtml(dataTransfer.getData('text/html'), editor.editing.view.document.stylesProcessor);
 
-                content = this.stripTags(bodyString, '<b><i><ol><ul><li><h1><h2><h3><h4><hr><p><strong><input><span><a><div>');
+                content = this.stripTags(bodyString, '<b><i><ol><ul><li><h1><h2><h3><h4><hr><p><strong><input><span><a><div><table><tbody><thead><tfoot><tr><td><th>');
                 content = this.stripInlineStyles(content);
                 content = this.stripInvalidColors(content);
 
