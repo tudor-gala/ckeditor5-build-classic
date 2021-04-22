@@ -67,12 +67,11 @@ class StripPasteFormat extends Plugin {
 
     init() {
         const editor = this.editor;
-        const clipboardPlugin = editor.plugins.get( 'Clipboard' );
         const editingView = editor.editing.view;
         let content;
 
-        editingView.document.on( 'clipboardInput', ( evt, data ) => {
-            if ( editor.isReadOnly ) {
+        editingView.document.on('clipboardInput', (evt, data) => {
+            if (editor.isReadOnly) {
                 return;
             }
 
@@ -102,11 +101,8 @@ class StripPasteFormat extends Plugin {
 
             // console.log('after >>', content);
 
-            content = clipboardPlugin._htmlDataProcessor.toView( content );
-            clipboardPlugin.fire( 'inputTransformation', { content, dataTransfer } );
-            editingView.scrollToTheSelection();
-            evt.stop();
-        } );
+            data.content = editor.data.htmlProcessor.toView( content );
+        });
     }
 }
 
