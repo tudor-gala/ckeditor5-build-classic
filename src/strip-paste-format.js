@@ -92,9 +92,16 @@ class StripPasteFormat extends Plugin {
                 console.log('before >>', dataTransfer.getData('text/plain'));
             }
 
-            content = content.replace(/<p><\/p>/g, '');
             content = content.replace(/<p><br>/g, '<p>');
+            content = content.replace(/<br><p>/g, '<p>');
             content = content.replace(/<br><\/p>/g, '</p>');
+            content = content.replace(/<p><\/p>/g, '');
+
+            content = content.replace(/<div><br>/g, '<div>');
+            content = content.replace(/<br><div>/g, '<div>');
+            content = content.replace(/<br><\/div>/g, '</div>');
+            content = content.replace(/<div><\/div>/g, '');
+
             content = content.replace(/(<br>)+/g, '<br>');
             content = content.replace(/^(<br>)+/g, '');
             content = content.replace(/(<br>)+$/g, '');
