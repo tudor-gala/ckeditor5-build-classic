@@ -1,6 +1,7 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 import { parseHtml } from "@ckeditor/ckeditor5-paste-from-office/src/filters/parse";
 import plainTextToHtml from '@ckeditor/ckeditor5-clipboard/src/utils/plaintexttohtml';
+import stripAttr from 'strip-attributes';
 
 class StripPasteFormat extends Plugin {
     static get pluginName() {
@@ -21,6 +22,14 @@ class StripPasteFormat extends Plugin {
 
             return allow.indexOf(`<${tag}>`) > -1 ? $0 : replacement;
         });
+    }
+
+    stripAttributes(str) {
+        return stripAttr(str, {keep: ['class']});
+    }
+
+    stripBrAttributes(str) {
+        return str.replace(/(<br)[^<>]*/gi, '<br');
     }
 
     stripInvalidColors(str) {
@@ -82,7 +91,9 @@ class StripPasteFormat extends Plugin {
 
                 content = bodyString.replace(/<br\s*\/\s*>/gi, '<br>');
                 content = this.stripTags(content, '<b><i><ol><ul><li><h1><h2><h3><h4><hr><p><strong><input><span><a><div><table><tbody><thead><tfoot><tr><td><th><br>');
+                content = this.stripAttributes(content);
                 content = this.stripInlineStyles(content);
+                content = this.stripBrAttributes(content);
                 content = this.stripInvalidColors(content);
 
                 console.log('before >>', dataTransfer.getData('text/html'));
